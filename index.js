@@ -1,6 +1,8 @@
 // const {writeFile} = require ('fs');
 const inquirer = require('inquirer');
 
+// Asks initial question to determine appropriate title to ask
+//to ask appropriate questions
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
@@ -11,14 +13,13 @@ const readline = require('readline').createInterface({
     readline.close();
   
 
-const role = position;
-// console.log(role);
-
+    const role = position;
+// Function renders questions based on role(position title)
 function buildQuestions(role){
     const validateInt =(str) => !!parseInt(str); 
     const validateLength = (str) => !!str.length;
 
-
+// Employee information questions
 const questions = [
 {
     type: 'input',
@@ -33,16 +34,12 @@ const questions = [
 },
 {
     type: 'input',
-    name: 'title',
-    message: `What is ${role}'s title?`
-},
-{
-    type: 'input',
     name: 'email',
     message: `What is ${role}'s email?`
 },
 
 ];
+// Adds apppropriate questions based on position title
 if (role ==="Manager"){
     questions.push({
         type: 'input',
@@ -67,18 +64,19 @@ else if (role === 'Engineer'){
     })
 }
 
-
-
-
 // Creates a function to initialize app
 async function init() {
     const answers = await inquirer.prompt(questions);
     console.log('the answers are ', answers);
-
 }
-if (role === 'Manager' || 'Engineer' || 'Intern')
-{init()};
-};
+
+// Initiates the App if any of the following requirements below are met
+if (role === 'Manager' || 'Engineer' || 'Intern'){
+    init()
+}else{
+    console.log('Enter a valid employee position title!')
+    }
+}
 
 buildQuestions(role);
 });
