@@ -1,7 +1,19 @@
 // const {writeFile} = require ('fs');
 const inquirer = require('inquirer');
-const position = 'Manager';
-const role = 'Intern';
+
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+   
+  readline.question(`What is the employees Position?`, position => {
+    console.log(`Hey there ${position}!`);
+    readline.close();
+  
+
+const role = position;
+// console.log(role);
+
 function buildQuestions(role){
     const validateInt =(str) => !!parseInt(str); 
     const validateLength = (str) => !!str.length;
@@ -64,6 +76,9 @@ async function init() {
     console.log('the answers are ', answers);
 
 }
-init();
+if (role === 'Manager' || 'Engineer' || 'Intern')
+{init()};
 };
+
 buildQuestions(role);
+});
